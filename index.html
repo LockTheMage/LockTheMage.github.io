@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senzu - A Fantasy Farming Space Odyssey</title>
+    
+    <!-- Importing a Pixelated Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
     <style>
         /* Reset default browser styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Set the background to black */
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-color: #000000;
+            font-family: 'Press Start 2P', cursive; /* Pixelated Font */
+            color: #FFFF00; /* Yellow Text */
         }
 
         /* Full-screen background video */
@@ -23,8 +36,8 @@
             object-fit: cover;
         }
 
-        /* Overlay for content */
-        .overlay {
+        /* Centered content */
+        .content {
             position: relative;
             height: 100vh;
             width: 100%;
@@ -33,8 +46,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #ffffff;
-            background: rgba(0, 0, 0, 0.4); /* Optional: Semi-transparent overlay */
+            padding: 20px;
         }
 
         /* Game Logo Styling */
@@ -44,41 +56,34 @@
             margin-bottom: 40px;
         }
 
-        /* Social Links Container */
+        /* Social Links Styling */
         .social-links {
             display: flex;
-            gap: 20px;
-            margin-top: 20px;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
 
-        /* Social Links Styling */
         .social-links a {
+            color: #FFFF00;
             text-decoration: none;
-            color: #ffffff;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-            transition: background-color 0.3s, transform 0.3s;
+            font-size: 14px;
+            transition: color 0.3s, text-decoration 0.3s;
         }
 
-        /* Hover Effects for Links */
         .social-links a:hover {
-            background-color: #ffffff;
-            color: #000000;
-            transform: scale(1.05);
+            color: #FFD700; /* Lighter yellow on hover */
+            text-decoration: underline;
         }
 
         /* Responsive Design */
-        @media (max-width: 600px) {
+        @media (min-width: 600px) {
             .social-links {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
             }
 
             .social-links a {
-                width: 80%;
-                padding: 12px 0;
+                font-size: 16px;
             }
         }
     </style>
@@ -87,14 +92,14 @@
 
     <!-- Background Video -->
     <video id="background-video" autoplay loop muted playsinline>
-        <source src="https://github.com/LockTheMage/LockTheMage.github.io/blob/main/LockWorking.webm" type="video/webm">
+        <source src="LockWorking.webm" type="video/webm">
         Your browser does not support the video tag.
     </video>
 
     <!-- Overlay Content -->
-    <div class="overlay">
+    <div class="content">
         <!-- Game Logo -->
-        <img src="https://github.com/LockTheMage/LockTheMage.github.io/blob/main/SenzuGameLogo.png?raw=true" alt="Senzu Game Logo" class="logo">
+        <img src="SenzuGameLogo.png" alt="Senzu Game Logo" class="logo">
 
         <!-- Social Links -->
         <div class="social-links">
