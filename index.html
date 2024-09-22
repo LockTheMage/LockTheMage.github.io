@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senzu - A Fantasy Farming Space Odyssey</title>
+    <title>LockTheMage - A Fantasy Farming Space Odyssey</title>
     
     <!-- Importing a Pixelated Font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -16,98 +16,223 @@
             box-sizing: border-box;
         }
 
-        /* Set the background to black */
+        /* Set the background to black and add the background image */
         body, html {
             height: 100%;
             width: 100%;
             background-color: #000000;
             font-family: 'Press Start 2P', cursive; /* Pixelated Font */
-            color: #FFFF00; /* Yellow Text */
+            color: #FFFFFF; /* Default Text Color */
+            position: relative; /* To position the overlay correctly */
+            overflow: hidden; /* Prevent scrollbars when overlay is active */
         }
 
-        /* Full-screen background video */
-        #background-video {
+        /* Overlay Div for Background Image */
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-        }
-
-        /* Centered content */
-        .content {
-            position: relative;
-            height: 100vh;
             width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/LockTheMage/LockTheMage.github.io/refs/heads/main/Small_stars.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            pointer-events: none; /* Allows clicks to pass through */
+            transition: opacity 0.9s ease;
+            z-index: 5; /* Ensure it's below the links which have z-index: 10 */
+        }
+
+        /* Class to show the overlay */
+        .overlay-active {
+            opacity: 1;
+        }
+
+        /* Main container setup */
+        .container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Align items at the start */
             align-items: center;
-            text-align: center;
+            height: 100vh;
             padding: 20px;
+            text-align: center;
+            position: relative; /* To ensure it's above the overlay */
+            z-index: 10; /* Above the overlay */
         }
 
-        /* Game Logo Styling */
-        .logo {
-            max-width: 300px;
-            width: 80%;
-            margin-bottom: 40px;
-        }
-
-        /* Social Links Styling */
-        .social-links {
+        /* Top Section: Social Links */
+        .top-section {
+            position: absolute;
+            left: 20px; /* Adjust as needed to move further from the edge */
+            top: 20px; /* Adjust as needed to move down from the top */
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
+            gap: 30px;
+            z-index: 20; /* Increased z-index to ensure it's on top */
         }
 
-        .social-links a {
-            color: #FFFF00;
+        /* Individual Link Styles */
+        .steam-link, .wishlist-link {
+            color: #FFFFFF;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 11px;
+            transition: color 0.3s, text-decoration 0.3s;
+            cursor: pointer; /* Indicate that it's interactive */
+        }
+
+        /* Color for 'Steam' only */
+        .steam-highlight {
+            color: #4d49ff; /* Custom Steam color */
+        }
+
+        .twitter-link {
+            color: #55acee;
+            text-decoration: none;
+            font-size: 11px;
             transition: color 0.3s, text-decoration 0.3s;
         }
 
-        .social-links a:hover {
-            color: #FFD700; /* Lighter yellow on hover */
+        .youtube-link {
+            color: #ff0000;
+            text-decoration: none;
+            font-size: 11px;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        /* Hover Effects for Each Link */
+        .steam-link:hover,
+        .wishlist-link:hover,
+        .twitter-link:hover,
+        .youtube-link:hover {
+            color: #FFD700; /* Yellow on hover */
             text-decoration: underline;
         }
 
-        /* Responsive Design */
-        @media (min-width: 600px) {
-            .social-links {
-                flex-direction: row;
+        /* Middle Section: Divided into Lock and Senzu Sections */
+        .middle-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px; /* Increased space between sub-sections */
+            flex-grow: 1;
+            justify-content: center; /* Vertically centers the middle section */
+            margin-top: -35vh;
+            z-index: 10; /* Ensure it's above the overlay */
+        }
+
+        /* Lock Section */
+        .lock-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lock-section img {
+            width: 100px;
+            max-width: 150px;
+        }
+
+        .lock-section p {
+            font-size: 12px;
+            color: #FFFFFF; /* Default text color */
+            white-space: nowrap;
+        }
+
+        /* Custom Color for "LockTheMage" */
+        .lockthemage-highlight {
+            color: #0083d3; /* Custom color for "LockTheMage" */
+        }
+
+        /* Senzu Section */
+        .senzu-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .senzu-section img {
+            width: 90vw;
+            max-width: 500px;
+            margin-top: 10vh;
+        }
+
+        .wishlist-link {
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        /* Media Query for Mobile Devices */
+        @media (max-width: 768px) {
+            .middle-section {
+                margin-top: 0; /* Remove negative margin on mobile */
             }
 
-            .social-links a {
-                font-size: 16px;
+            .top-section {
+                z-index: 20; /* Ensure top-section is above middle-section */
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Video -->
-    <video id="background-video" autoplay loop muted playsinline>
-        <source src="LockWorking.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+    <!-- Overlay Div -->
+    <div class="overlay"></div>
 
-    <!-- Overlay Content -->
-    <div class="content">
-        <!-- Game Logo -->
-        <img src="SenzuGameLogo.png" alt="Senzu Game Logo" class="logo">
+    <!-- Main Container -->
+    <div class="container">
 
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://www.youtube.com/@LockTheMage" target="_blank">YouTube</a>
-            <a href="https://twitter.com/lockthemage" target="_blank">Twitter</a>
-            <a href="https://store.steampowered.com/app/2876480/Senzu_A_Fantasy_Farming_Space_Odyssey/?beta=0" target="_blank">Steam Store</a>
+        <!-- Top Section: Social Links -->
+        <div class="top-section">
+            <a href="https://store.steampowered.com/app/2876480/Senzu_A_Fantasy_Farming_Space_Odyssey/?beta=0" target="_blank" class="steam-link"><span class="steam-highlight">Steam</span></a> |
+            <a href="https://twitter.com/lockthemage" target="_blank" class="twitter-link">Twitter</a> |
+            <a href="https://www.youtube.com/watch?v=UZVjzOybqv4" target="_blank" class="youtube-link">YouTube</a>
         </div>
+
+        <!-- Middle Section: Divided into Lock and Senzu Sections -->
+        <div class="middle-section">
+            
+            <!-- Lock Section: GIF and Text -->
+            <div class="lock-section">
+                <img src="https://raw.githubusercontent.com/LockTheMage/LockTheMage.github.io/main/LockWorking.gif" alt="Lock Working GIF">
+                <p><span class="lockthemage-highlight">LockTheMage</span> is working on...</p>
+            </div>
+
+            <!-- Senzu Section: Logo and Wishlist Link -->
+            <div class="senzu-section">
+                <img src="https://raw.githubusercontent.com/LockTheMage/LockTheMage.github.io/refs/heads/main/Senzu.png" alt="Senzu Game Logo">
+                <a href="https://store.steampowered.com/app/2876480/Senzu_A_Fantasy_Farming_Space_Odyssey/?beta=0" target="_blank" class="steam-link wishlist-link">Wishlist on Steam</a>
+            </div>
+
+        </div>
+
     </div>
+
+    <!-- JavaScript for Hover Effect -->
+    <script>
+        // Select all elements with class 'steam-link' and 'wishlist-link'
+        const hoverLinks = document.querySelectorAll('.steam-link, .wishlist-link');
+
+        // Select the overlay div
+        const overlay = document.querySelector('.overlay');
+
+        // Function to activate the overlay
+        const activateOverlay = () => {
+            overlay.classList.add('overlay-active');
+        };
+
+        // Function to deactivate the overlay
+        const deactivateOverlay = () => {
+            overlay.classList.remove('overlay-active');
+        };
+
+        // Add event listeners to each link
+        hoverLinks.forEach(link => {
+            link.addEventListener('mouseenter', activateOverlay);
+            link.addEventListener('mouseleave', deactivateOverlay);
+        });
+    </script>
 
 </body>
 </html>
